@@ -1,6 +1,6 @@
 export default function Navbar() {
   return (
-    <nav className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+    <nav className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto font-dm-sans">
       <div className="flex items-center gap-2">
         <div className="w-10 h-10 bg-brandYellow rounded-full flex items-center justify-center font-bold text-brandDark">
           M
