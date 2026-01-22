@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { HashLink } from "react-router-hash-link";
+import { motion, AnimatePresence } from "framer-motion";
 
 const images = [
   "/imageBg/val1.jpeg",
@@ -9,34 +11,74 @@ const images = [
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const touchStartX = useRef(null);
 
   useEffect(() => {
+    if (paused) return;
+
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [paused]);
+
+  const handleTouchStart = (e) => {
+    setPaused(true);
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!touchStartX.current) return;
+
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+
+    if (diff > 50) {
+      setCurrent((prev) => (prev + 1) % images.length);
+    } else if (diff < -50) {
+      setCurrent((prev) =>
+        prev === 0 ? images.length - 1 : prev - 1
+      );
+    }
+
+    touchStartX.current = null;
+    setPaused(false);
+  };
 
   return (
-    <section className="relative h-[90vh] overflow-hidden">
+    <section
+      className="relative h-[90vh] overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Background Images */}
-      {images.map((img, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-            index === current ? "opacity-100" : "opacity-0"
-          }`}
-          style={{ backgroundImage: `url(${img})` }}
+      <AnimatePresence>
+        <motion.div
+          key={current}
+          className="absolute inset-0 bg-center bg-cover"
+          style={{ backgroundImage: `url(${images[current]})` }}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
         />
-      ))}
+      </AnimatePresence>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-primaryRed/40" />
+      <div className="absolute inset-0 bg-primaryRed/20 z-10" />
 
       {/* Content */}
-      <div className="relative z-10 flex items-center justify-center h-full px-6 text-center">
-        <div className="max-w-3xl text-white">
+      <div className="relative z-20 flex items-center justify-center h-full px-6 text-center">
+        <motion.div
+          className="max-w-3xl text-white"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+        >
           <span className="uppercase tracking-wide text-sm">
             Valentine Specials ❤️
           </span>
@@ -51,15 +93,16 @@ export default function Hero() {
           </p>
 
           <div className="flex justify-center gap-4 mt-10">
-            <a
-              href="#packages"
+            <HashLink
+              smooth
+              to="#packages"
               className="bg-white text-primaryRed 
-      px-2.5 py-0.5 text-sm text-center flex items-center
-      sm:px-6 sm:py-3 sm:text-base
-      rounded-full font-medium"
+              px-2.5 py-0.5 text-sm flex items-center
+              sm:px-6 sm:py-3 sm:text-base
+              rounded-full font-medium"
             >
               View Packages
-            </a>
+            </HashLink>
 
             <a
               href="https://wa.me/234XXXXXXXXXX"
@@ -68,7 +111,12 @@ export default function Hero() {
               Order on WhatsApp
             </a>
           </div>
-        </div>
+
+          {/* Mobile hint */}
+          <p className="mt-6 text-xs opacity-70 sm:hidden">
+            Swipe to explore →
+          </p>
+        </motion.div>
       </div>
     </section>
   );
