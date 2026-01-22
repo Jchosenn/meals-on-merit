@@ -1,51 +1,51 @@
-import { useEffect, useRef, useState } from "react";
-import { HashLink } from "react-router-hash-link";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react"
+import { HashLink } from "react-router-hash-link"
+import { motion, AnimatePresence } from "framer-motion"
 
 const images = [
   "/imageBg/val1.jpeg",
   "/imageBg/val2.jpeg",
   "/imageBg/val3.jpg",
   "/imageBg/val4.jpeg",
-];
+]
 
 export default function Hero() {
-  const [current, setCurrent] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const touchStartX = useRef(null);
+  const [current, setCurrent] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const touchStartX = useRef(null)
 
   useEffect(() => {
-    if (paused) return;
+    if (paused) return
 
     const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % images.length);
-    }, 4000);
+      setCurrent((prev) => (prev + 1) % images.length)
+    }, 4000)
 
-    return () => clearInterval(interval);
-  }, [paused]);
+    return () => clearInterval(interval)
+  }, [paused])
 
   const handleTouchStart = (e) => {
-    setPaused(true);
-    touchStartX.current = e.touches[0].clientX;
-  };
+    setPaused(true)
+    touchStartX.current = e.touches[0].clientX
+  }
 
   const handleTouchEnd = (e) => {
-    if (!touchStartX.current) return;
+    if (!touchStartX.current) return
 
-    const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX.current - touchEndX;
+    const touchEndX = e.changedTouches[0].clientX
+    const diff = touchStartX.current - touchEndX
 
     if (diff > 50) {
-      setCurrent((prev) => (prev + 1) % images.length);
+      setCurrent((prev) => (prev + 1) % images.length)
     } else if (diff < -50) {
       setCurrent((prev) =>
         prev === 0 ? images.length - 1 : prev - 1
-      );
+      )
     }
 
-    touchStartX.current = null;
-    setPaused(false);
-  };
+    touchStartX.current = null
+    setPaused(false)
+  }
 
   return (
     <section
@@ -119,5 +119,5 @@ export default function Hero() {
         </motion.div>
       </div>
     </section>
-  );
+  )
 }
