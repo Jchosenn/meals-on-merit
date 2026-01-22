@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 const images = [
   "/imageBg/val1.jpeg",
-  "/imageBg/val2.jpg",
+  "/imageBg/val2.jpeg",
   "/imageBg/val3.jpg",
-  "/imageBg/val4.jpg",
+  "/imageBg/val4.jpeg",
 ];
 
 export default function Hero() {
@@ -32,7 +32,7 @@ export default function Hero() {
       ))}
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-primaryRed/60" />
+      <div className="absolute inset-0 bg-primaryRed/40" />
 
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center h-full px-6 text-center">
