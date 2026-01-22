@@ -1,14 +1,14 @@
 const packages = [
   {
-    title: "Lovers’ Delight ❤️",
+    title: "Soft Love Box❤️",
     desc: "An intimate meal experience designed for couples.",
   },
   {
-    title: "Self-Love Feast 🌸",
+    title: "BAE's Favourite Box 🌸",
     desc: "Premium solo meals for treating yourself right.",
   },
   {
-    title: "Friends & Family Combo 💕",
+    title: "Couples Treat💕",
     desc: "Perfect for sharing moments and memories together.",
   },
   {

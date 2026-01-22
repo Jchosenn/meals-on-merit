@@ -1,6 +1,7 @@
 import Navbar from '../components/navbar'
 import Hero from '../components/hero'
 import ValentinePackages from '../components/valentinePackages'
+import WhyUs from '../components/whyus'
 
 export default function home() {
   return (
@@ -8,6 +9,7 @@ export default function home() {
         <Navbar/>
         <Hero/>
         <ValentinePackages/>
+        <WhyUs/>
     </div>
   )
 }

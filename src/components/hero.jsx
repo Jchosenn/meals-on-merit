@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section className="px-6 py-20 text-center max-w-4xl mx-auto ">
+    <section className="w-full px-6 py-20 text-center max-w-4xl mx-auto bg-[url('/imageBg/val-couple.jpg')]">
       <span className="text-softPink uppercase tracking-wide text-sm">
         Valentine Special ❤️
       </span>
