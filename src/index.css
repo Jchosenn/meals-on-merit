@@ -5,8 +5,8 @@
 @theme {
   --font-dm-sans: DM Sans, "sans-serif";
   --font-montserrat: Montserrat, "sans-serif";
-  --color-brandYellow: #F7B500;
-  --color-brandDark: #0F0F0F;
-  --color-valentineRed: #E63946;
-  --softPink: #FFF1F2;
+  --color-primaryRed: #C1121F;
+  --color-softRed: #FDE8EA;
+  --color-pureWhite: #FFFFFF;
+  --color-textDark: #1A1A1A;
 } 

@@ -1,34 +1,74 @@
+import { useEffect, useState } from "react";
+
+const images = [
+  "/imageBg/val1.jpeg",
+  "/imageBg/val2.jpg",
+  "/imageBg/val3.jpg",
+  "/imageBg/val4.jpg",
+];
+
 export default function Hero() {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section className="w-full px-6 py-20 text-center max-w-4xl mx-auto bg-[url('/imageBg/val-couple.jpg')]">
-      <span className="text-softPink uppercase tracking-wide text-sm">
-        Valentine Special ❤️
-      </span>
+    <section className="relative h-[90vh] overflow-hidden">
+      {/* Background Images */}
+      {images.map((img, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+            index === current ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ backgroundImage: `url(${img})` }}
+        />
+      ))}
 
-      <h1 className="text-4xl md:text-5xl font-bold font-montserrat mt-4">
-        Made With Love.
-        <span className="text-brandYellow"> Served With Intention.</span>
-      </h1>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-primaryRed/60" />
 
-      <p className="mt-6 text-gray-300 max-w-2xl mx-auto font-dm-sans">
-        This Valentine, say “I love you” with meals that warm the heart and
-        satisfy the soul. Perfect for lovers, friends, family and you.
-      </p>
+      {/* Content */}
+      <div className="relative z-10 flex items-center justify-center h-full px-6 text-center">
+        <div className="max-w-3xl text-white">
+          <span className="uppercase tracking-wide text-sm">
+            Valentine Specials ❤️
+          </span>
 
-      <div className="flex justify-center gap-4 mt-10">
-        <a
-          href="#packages"
-          className="bg-brandYellow text-brandDark px-6 py-3 rounded-full font-medium"
-        >
-          View Packages
-        </a>
+          <h1 className="text-4xl md:text-5xl font-bold mt-4">
+            Love Tastes Better <br /> When It’s Shared
+          </h1>
 
-        <a
-          href="https://wa.me/234XXXXXXXXXX"
-          className="border border-brandYellow px-6 py-3 rounded-full font-medium"
-        >
-          Order via WhatsApp
-        </a>
+          <p className="mt-6 text-white/90">
+            This Valentine, express your love with carefully prepared meals
+            made to create unforgettable moments.
+          </p>
+
+          <div className="flex justify-center gap-4 mt-10">
+            <a
+              href="#packages"
+              className="bg-white text-primaryRed 
+      px-2.5 py-0.5 text-sm text-center flex items-center
+      sm:px-6 sm:py-3 sm:text-base
+      rounded-full font-medium"
+            >
+              View Packages
+            </a>
+
+            <a
+              href="https://wa.me/234XXXXXXXXXX"
+              className="border border-white px-6 py-3 rounded-full font-medium"
+            >
+              Order on WhatsApp
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

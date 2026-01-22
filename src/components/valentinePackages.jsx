@@ -1,42 +1,50 @@
 const packages = [
   {
-    title: "Soft Love Box❤️",
-    desc: "An intimate meal experience designed for couples.",
+    title: "Lovers’ Delight ❤️",
+    desc: "A romantic meal package crafted for couples who want an intimate dining experience.",
   },
   {
-    title: "BAE's Favourite Box 🌸",
-    desc: "Premium solo meals for treating yourself right.",
+    title: "Self-Love Feast 🌸",
+    desc: "A premium solo meal for those choosing to celebrate themselves.",
   },
   {
-    title: "Couples Treat💕",
-    desc: "Perfect for sharing moments and memories together.",
+    title: "Friends & Family Combo 💕",
+    desc: "A generous spread made for sharing love with friends and family.",
   },
   {
     title: "Office Love Box 💌",
-    desc: "Corporate-friendly packages for teams and appreciation.",
+    desc: "Perfect for corporate gifting and team appreciation.",
   },
 ];
 
 export default function ValentinePackages() {
   return (
-    <section id="packages" className="px-6 py-20 bg-black/30">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center">
-          Valentine Specials 💝
+    <section id="packages" className="px-6 py-20 bg-softRed">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-3xl font-bold text-center text-primaryRed">
+          Valentine Packages
         </h2>
 
-        <p className="text-center text-gray-300 mt-4">
-          Carefully curated packages for every kind of love.
+        <p className="text-center mt-4">
+          Thoughtfully curated meals for every kind of love.
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <div className="mt-12 space-y-6">
           {packages.map((pkg, index) => (
             <div
               key={index}
-              className="border border-brandYellow/30 rounded-2xl p-6 hover:border-brandYellow transition"
+              className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white rounded-2xl p-6 shadow-sm"
             >
-              <h3 className="font-semibold text-lg">{pkg.title}</h3>
-              <p className="text-gray-300 mt-3">{pkg.desc}</p>
+              <div>
+                <h3 className="font-semibold text-lg text-primaryRed">
+                  {pkg.title}
+                </h3>
+                <p className="mt-2 text-gray-700">{pkg.desc}</p>
+              </div>
+
+              <span className="text-sm font-medium text-primaryRed">
+                View details →
+              </span>
             </div>
           ))}
         </div>
